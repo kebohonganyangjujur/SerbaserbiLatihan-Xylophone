@@ -11,31 +11,20 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    var player : AVAudioPlayer?
+    var player: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "C", withExtension: "wav") else { return }
-
-        do {
-            
-            let player = try AVAudioPlayer(contentsOf: url)
-
-            player.play()
-
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print("Button pressed")
-        print(sender.currentTitle)
+        playSound(soundName: sender.currentTitle!)
     }
-    
-    
-
+   
+    func playSound(soundName: String) {
+        let url = Bundle.main.url(forResource: soundName, withExtension: "wav")
+            player = try! AVAudioPlayer(contentsOf: url!)
+            player.play()
+    }
 }
 
